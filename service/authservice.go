@@ -26,22 +26,17 @@ func NewAuthService() *AuthService {
 }
 
 func (s *AuthService) SignUp(user *model.User) error {
-	// Normalize username to lowercase for case-insensitive checks
 	user.Username = strings.ToLower(user.Username)
 
-	// Check if the username already exists
 	if err := s.checkDuplicateUsername(user.Username); err != nil {
 		return err
 	}
 
-	// Hash the password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
 		return err
 	}
 	user.Password = string(hashedPassword)
-
-	// Create the user
 	if err := database.DB.Create(user).Error; err != nil {
 		return err
 	}
@@ -49,12 +44,10 @@ func (s *AuthService) SignUp(user *model.User) error {
 	return nil
 }
 
-// checkDuplicateUsername checks if a username already exists in the database
 func (s *AuthService) checkDuplicateUsername(username string) error {
 	var existingUser model.User
 	if err := database.DB.Where("LOWER(username) = ?", username).First(&existingUser).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			// User with the given username does not exist, it's not a duplicate
 			return nil
 		}
 		return err

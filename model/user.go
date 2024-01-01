@@ -11,5 +11,5 @@ type User struct {
 	Password     string `json:"-"`
 	FirstName    string `json:"first_name"`
 	LastName     string `json:"last_name"`
-	Role         string `json:"role" gorm:"not null"` // "customer", "freelancer", "studio"
+	Role         string `json:"role" gorm:"not null"`
 }

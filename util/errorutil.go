@@ -1,5 +1,3 @@
-// util/errorutil.go
-
 package util
 
 import (
@@ -20,6 +18,5 @@ func NewErrorResponse(c *gin.Context, errorDescription, userDescription, code st
 		UserDescription:  userDescription,
 		Code:             code,
 	}
-
 	c.JSON(statusCode, response)
 }

@@ -13,6 +13,5 @@ func SetupRouter(authController *controller.AuthController) *gin.Engine {
 		authGroup.POST("/signup", authController.SignUp)
 		authGroup.POST("/login", authController.Login)
 	}
-
 	return r
 }

@@ -1,5 +1,3 @@
-// controller/authcontroller.go
-
 package controller
 
 import (
@@ -18,22 +16,6 @@ func NewAuthController(authService *service.AuthService) *AuthController {
 		authService: authService,
 	}
 }
-
-// func (c *AuthController) SignUp(ctx *gin.Context) {
-// 	var user model.User
-
-// 	if err := ctx.ShouldBindJSON(&user); err != nil {
-// 		util.NewErrorResponse(ctx, "Invalid request", "Invalid request format", "4001", 400)
-// 		return
-// 	}
-
-// 	if err := c.authService.SignUp(&user); err != nil {
-// 		util.NewErrorResponse(ctx, "Internal Server Error", "Failed to register user", "5001", 500)
-// 		return
-// 	}
-
-// 	ctx.JSON(200, gin.H{"message": "User registered successfully"})
-// }
 
 func (c *AuthController) SignUp(ctx *gin.Context) {
 	var user model.User
